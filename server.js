@@ -58,6 +58,13 @@ app.post('/api/todos', function create(req, res) {
   /* This endpoint will add a todo to our "database"
    * and respond with the newly created todo.
    */
+   var task = req.body.task;
+   var descr = req.body.description;
+   console.log(req.params.id);
+   var newTodo = {_id: parseInt(req.params.id)+1, task: task, description: descr};
+   todos.push(newTodo);
+   console.log(newTodo);
+   res.json(newTodo);
 });
 
 app.get('/api/todos/:id', function show(req, res) {
@@ -73,6 +80,7 @@ app.put('/api/todos/:id', function update(req, res) {
    * id specified in the route parameter (:id) and respond
    * with the newly updated todo.
    */
+   res.json(todos[parseInt(req.params.id) - 1]);
 });
 
 app.delete('/api/todos/:id', function destroy(req, res) {
